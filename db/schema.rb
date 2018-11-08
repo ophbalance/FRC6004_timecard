@@ -182,6 +182,18 @@ ActiveRecord::Schema.define(version: 20180130014312) do
     t.date "preseason_start"
   end
 
+  create_table "laptimelogs", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "timein"
+    t.datetime "timeout"
+    t.integer "time_logged"
+    t.datetime "updated_at"
+    t.integer "year_id"
+    t.integer "week_id"
+    t.integer "laptop_id"
+    t.index ["user_id"], name: "index_timelogs_on_user_id"
+  end
+
   add_foreign_key "colleges", "users"
   add_foreign_key "flex_hours", "users"
   add_foreign_key "flex_hours", "weeks"
