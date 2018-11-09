@@ -26,6 +26,10 @@
 		<h4>Check-in Page</h4>
 		<li><%=link_to "Student Login", studentlogin_path%></li>
 	<%end%>
+	<%if current_user.is_default_user%>
+		<h4>Asset Check-in Page</h4>
+		<li><%=link_to "Asset Login", asset_path%></li>
+	<%end%>
 
 	<h4>User Management</h4>
 		<li><%=link_to "All Users (Students)", users_path%></li>

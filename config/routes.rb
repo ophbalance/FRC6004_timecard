@@ -5,7 +5,7 @@ Timesheet::Application.routes.draw do
   resources :messages
   resources :weeks
   resources :week_exceptions
-
+  resources :computers
 
   resources :hour_exceptions
 
@@ -33,12 +33,14 @@ Timesheet::Application.routes.draw do
 
 
   resources :timelogs 
+  resources :laptimelogs
   resources :users, only: [:index, :remove, :show, :edit, :new, :create, :update, :destroy,]
   resources :sessions
 
   get "welcome/index"
   
   match 'studentlogin' => 'timelogs#student', via: [:get, :post]
+  match 'assetlogin' => 'laptimelogs#computer', via: [:get, :post]
   get 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
   
   get 'currentStudents' => 'users#current', :as=>"students"

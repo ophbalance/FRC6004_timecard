@@ -3,10 +3,12 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   before_save :clean_phone_number
   has_many :timelogs
+  has_many :laptimelogs
   belongs_to :school
   has_and_belongs_to_many :forms
   has_many :forms_users
   has_many :years, :through=>:timelogs
+  has_many :years, :through=>:laptimelogs
   has_one :hour_override, -> {where(year_id: Year.current_year.id)},  dependent: :destroy
   has_many :hour_exceptions, -> {where(year_id: Year.current_year.id)}, dependent: :destroy
   has_many :flex_hours, -> {joins(:week).where("weeks.year_id = ?", Year.current_year.id)}, dependent: :destroy
@@ -86,6 +88,13 @@ class User < ActiveRecord::Base
       return false
     else
       return self.timelogs.in_today.first
+    end
+  end
+  def lapsigned_in
+    if self.laptimelogs.in_today.nil? || self.laptimelogs.in_today.empty?
+      return false
+    else
+      return self.laptimelogs.in_today.first
     end
   end
   ###################### END Authentication ##########################

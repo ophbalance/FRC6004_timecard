@@ -10,6 +10,14 @@
 		<%if current_user.is_default_user || current_user.try(:admin)%>
 			<li><%=link_to "Student Login", studentlogin_path%></li>
 		<%end%>
+
+		<%if current_user.is_default_user || current_user.try(:admin)%>
+			<li><%=link_to "Asset Login", assetlogin_path%></li>
+		<%end%>
+
+		<%if current_user.is_default_user || current_user.try(:admin)%>
+			<li><%=link_to "Assets", computers_path%></li>
+		<%end%>
 		
 		<%if current_user.try(:admin)%>
 		    <li class="dropdown">
